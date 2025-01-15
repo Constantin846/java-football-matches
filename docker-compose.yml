@@ -1,0 +1,29 @@
+services:
+  fm-service:
+    build: .
+    image: fm-service
+    container_name: fm-service
+    ports:
+      - "8080:8080"
+    depends_on:
+      - fm-db
+    environment:
+      - SPRING_DATASOURCE_URL=jdbc:postgresql://fm-db:5432/fm
+      - SPRING_DATASOURCE_USERNAME=fm
+      - SPRING_DATASOURCE_PASSWORD=fm
+      - SPRING_DATASOURCE_DRIVERCLASSNAME=org.postgresql.Driver
+
+  fm-db:
+    image: postgres:16.1
+    container_name: postgres-fm-db
+    ports:
+      - "6542:5432"
+    environment:
+      - POSTGRES_PASSWORD=fm
+      - POSTGRES_USER=fm
+      - POSTGRES_DB=fm
+    healthcheck:
+      test: pg_isready -q -d $$POSTGRES_DB -U $$POSTGRES_USER
+      timeout: 5s
+      interval: 5s
+      retries: 10

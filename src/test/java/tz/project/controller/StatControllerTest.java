@@ -14,6 +14,7 @@ import tz.project.model.Game;
 import tz.project.service.StatService;
 
 import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.mockito.Mockito.verify;
@@ -59,9 +60,11 @@ class StatControllerTest {
     @SneakyThrows
     @Test
     void findStats() {
-        LocalDate date = LocalDate.of(2012, 12, 12);
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd.MM.yyyy");
+        String dateStr = "12.12.2012";
+        LocalDate date = LocalDate.parse(dateStr, formatter);
 
-        mockMvc.perform(get(String.format("/table?date=%s", date)))
+        mockMvc.perform(get(String.format("/table?date=%s", dateStr)))
                 .andDo(print())
                 .andExpect(status().isOk());
 
@@ -76,5 +79,15 @@ class StatControllerTest {
                 .andExpect(status().isOk());
 
         verify(statService).findStats(LocalDate.now());
+    }
+
+    @SneakyThrows
+    @Test
+    void findStats_notMetDateFormat() {
+        String dateStr = "2.12.2012";
+
+        mockMvc.perform(get(String.format("/table?date=%s", dateStr)))
+                .andDo(print())
+                .andExpect(status().isBadRequest());
     }
 }

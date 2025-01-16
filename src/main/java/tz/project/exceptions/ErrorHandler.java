@@ -24,6 +24,12 @@ public class ErrorHandler {
         return Map.of(ERROR, e.getMessage());
     }
 
+    @ExceptionHandler
+    @ResponseStatus(HttpStatus.BAD_REQUEST)
+    public Map<String, String> handlerNotMetDateFormatException(final NotMetDateFormatException e) {
+        return Map.of(ERROR, e.getMessage());
+    }
+
     @ExceptionHandler(MethodArgumentNotValidException.class)
     @ResponseStatus(HttpStatus.BAD_REQUEST)
     public Map<String, String> handlerValidException(final MethodArgumentNotValidException e) {

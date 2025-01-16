@@ -28,13 +28,13 @@ public class StatServiceImpl implements StatService {
     @Transactional
     @Override
     public Game addMatch(MatchDto matchDto) {
-        Game game = mapper.mapToGame(matchDto);
+        Game game = mapper.toGame(matchDto);
         return saveGame(game);
     }
 
     @Override
     public List<TeamStatDto> findStats(LocalDate date) {
-        return gameOfTeamRepository.findStatDtoBeforeDate(Date.valueOf(date));
+        return gameOfTeamRepository.findStatDtoForDate(Date.valueOf(date));
     }
 
     private Game saveGame(Game game) {

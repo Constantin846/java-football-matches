@@ -17,5 +17,5 @@ public interface GameOfTeamRepository extends JpaRepository<GameOfTeam, Long> {
             group by gt.team
             order by sum(gt.points) desc
             """)
-    List<TeamStatDto> findStatDtoBeforeDate(@Param("date") Date date);
+    List<TeamStatDto> findStatDtoForDate(@Param("date") Date date);
 }

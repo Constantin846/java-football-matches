@@ -10,7 +10,7 @@ import java.sql.Date;
 @Component
 public class MatchDtoGameMapperImpl implements MatchDtoGameMapper {
     @Override
-    public Game mapToGame(MatchDto matchDto) {
+    public Game toGame(MatchDto matchDto) {
         Game game = new Game();
         game.setHomeTeamInfo(getHomeTeamInfo(matchDto));
         game.setAwayTeamInfo(getAwayTeamInfo(matchDto));

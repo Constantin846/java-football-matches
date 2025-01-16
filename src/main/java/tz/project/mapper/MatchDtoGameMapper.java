@@ -4,5 +4,5 @@ import tz.project.dto.MatchDto;
 import tz.project.model.Game;
 
 public interface MatchDtoGameMapper {
-    Game mapToGame(MatchDto matchDto);
+    Game toGame(MatchDto matchDto);
 }

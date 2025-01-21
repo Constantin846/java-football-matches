@@ -1,4 +1,4 @@
-# Java Football Matches
+# Football Matches
 ### Описание
 Приложение состовляет статистику футбольных матчах.
 
